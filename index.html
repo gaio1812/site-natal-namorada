@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Natal, Meu Amor! 🎄❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Georgia', serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #ffffff;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ============== NEVE ANIMADA ============== */
+        .snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #ffffff;
+            font-size: var(--size);
+            opacity: var(--opacity);
+            animation: fall var(--duration) linear infinite;
+            animation-delay: var(--delay);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: var(--opacity);
+            }
+            100% {
+                transform: translateY(100vh) translateX(var(--drift)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ============== PARTÍCULAS DOURADAS ============== */
+        .sparkle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #ffd700, transparent);
+            border-radius: 50%;
+            animation: sparkleFloat var(--duration) ease-in-out infinite;
+            animation-delay: var(--delay);
+            opacity: var(--opacity);
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% {
+                transform: translateY(var(--startY)) translateX(var(--startX)) scale(1);
+                opacity: 0;
+            }
+            50% {
+                opacity: var(--opacity);
+                transform: translateY(var(--midY)) translateX(var(--midX)) scale(1.5);
+            }
+        }
+
+        /* ============== HERO SECTION ============== */
+        .hero {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            animation: heroEntry 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            opacity: 0;
+        }
+
+        @keyframes heroEntry {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(36px, 8vw, 80px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #d4af37 50%, #ffffff 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            text-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            letter-spacing: 2px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(20px, 4vw, 32px);
+            font-weight: 300;
+            margin-bottom: 40px;
+            color: #e2e8f0;
+            letter-spacing: 1px;
+            animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============== COUNTDOWN TIMER ============== */
+        .countdown-container {
+            margin: 50px 0;
+            animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s backwards;
+        }
+
+        .countdown-title {
+            font-size: clamp(18px, 3vw, 24px);
+            color: #d4af37;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            background: rgba(15, 118, 110, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 25px 30px;
+            min-width: 100px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(212, 175, 55, 0.2);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .time-unit:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212, 175, 55, 0.4);
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+
+        .time-value {
+            font-size: clamp(36px, 6vw, 48px);
+            font-weight: 700;
+            color: #d4af37;
+            display: block;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .time-label {
+            font-size: clamp(12px, 2vw, 14px);
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+            display: block;
+            font-weight: 600;
+        }
+
+        /* ============== ÁRVORE DE NATAL ============== */
+        .christmas-tree {
+            margin: 60px 0;
+            animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s backwards;
+        }
+
+        .tree-svg {
+            width: clamp(200px, 40vw, 300px);
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(15, 118, 110, 0.5));
+        }
+
+        .tree-part {
+            fill: #0f766e;
+        }
+
+        .tree-trunk {
+            fill: #78350f;
+        }
+
+        .tree-star {
+            fill: #fbbf24;
+            animation: starGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes starGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 5px #fbbf24);
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #fbbf24);
+                transform: scale(1.1);
+            }
+        }
+
+        .tree-light {
+            animation: lightBlink 1.5s ease-in-out infinite;
+        }
+
+        .tree-light:nth-child(odd) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes lightBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* ============== PRESENTES ============== */
+        .gifts-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s backwards;
+        }
+
+        .gift {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .gift:hover {
+            animation: giftShake 0.5s ease-in-out;
+        }
+
+        @keyframes giftShake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        .gift-box {
+            fill: var(--gift-color);
+        }
+
+        .gift-ribbon {
+            fill: #d4af37;
+        }
+
+        /* ============== MENSAGEM ============== */
+        .message {
+            max-width: 700px;
+            margin: 60px auto 40px;
+            padding: 40px;
+            background: rgba(15, 118, 110, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.5s backwards;
+        }
+
+        .message p {
+            font-size: clamp(16px, 3vw, 20px);
+            line-height: 1.8;
+            color: #e2e8f0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .signature {
+            font-size: clamp(18px, 3vw, 24px);
+            color: #d4af37;
+            font-weight: 600;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        /* ============== RESPONSIVE ============== */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 30px 15px;
+            }
+
+            .time-unit {
+                padding: 20px 25px;
+                min-width: 80px;
+            }
+
+            .countdown {
+                gap: 15px;
+            }
+
+            .message {
+                padding: 30px 20px;
+                margin: 40px 15px 30px;
+            }
+
+            .gifts-container {
+                gap: 20px;
+            }
+
+            .gift {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Neve Animada -->
+    <div class="snow-container" id="snow-container"></div>
+
+    <!-- Partículas Douradas -->
+    <div class="sparkle-container" id="sparkle-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">Feliz Natal, Meu Amor!</h1>
+        <p class="hero-subtitle">Um Natal mágico para você ❤️</p>
+
+        <!-- Countdown -->
+        <div class="countdown-container">
+            <h2 class="countdown-title">Contagem para o Natal</h2>
+            <div class="countdown" id="countdown">
+                <div class="time-unit">
+                    <span class="time-value" id="days">00</span>
+                    <span class="time-label">Dias</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="hours">00</span>
+                    <span class="time-label">Horas</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="minutes">00</span>
+                    <span class="time-label">Minutos</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="seconds">00</span>
+                    <span class="time-label">Segundos</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Árvore de Natal -->
+        <div class="christmas-tree">
+            <svg class="tree-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+                <!-- Estrela -->
+                <polygon class="tree-star" points="100,10 105,25 120,25 108,35 113,50 100,40 87,50 92,35 80,25 95,25"/>
+                
+                <!-- Árvore -->
+                <polygon class="tree-part" points="100,40 70,80 80,80 55,115 65,115 40,150 160,150 135,115 145,115 120,80 130,80"/>
+                
+                <!-- Tronco -->
+                <rect class="tree-trunk" x="85" y="150" width="30" height="40" rx="5"/>
+                
+                <!-- Luzes -->
+                <circle class="tree-light" cx="85" cy="70" r="4" fill="#ef4444"/>
+                <circle class="tree-light" cx="115" cy="70" r="4" fill="#fbbf24"/>
+                <circle class="tree-light" cx="75" cy="95" r="4" fill="#3b82f6"/>
+                <circle class="tree-light" cx="100" cy="100" r="4" fill="#ef4444"/>
+                <circle class="tree-light" cx="125" cy="95" r="4" fill="#10b981"/>
+                <circle class="tree-light" cx="65" cy="125" r="4" fill="#fbbf24"/>
+                <circle class="tree-light" cx="90" cy="130" r="4" fill="#3b82f6"/>
+                <circle class="tree-light" cx="110" cy="130" r="4" fill="#ef4444"/>
+                <circle class="tree-light" cx="135" cy="125" r="4" fill="#10b981"/>
+            </svg>
+        </div>
+
+        <!-- Presentes -->
+        <div class="gifts-container">
+            <svg class="gift" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #ef4444;"/>
+                <rect class="gift-ribbon" x="45" y="35" width="10" height="50"/>
+                <rect class="gift-ribbon" x="20" y="55" width="60" height="10"/>
+                <ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/>
+            </svg>
+            
+            <svg class="gift" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #10b981;"/>
+                <rect class="gift-ribbon" x="45" y="35" width="10" height="50"/>
+                <rect class="gift-ribbon" x="20" y="55" width="60" height="10"/>
+                <ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/>
+            </svg>
+            
+            <svg class="gift" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #3b82f6;"/>
+                <rect class="gift-ribbon" x="45" y="35" width="10" height="50"/>
+                <rect class="gift-ribbon" x="20" y="55" width="60" height="10"/>
+                <ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/>
+            </svg>
+        </div>
+
+        <!-- Mensagem -->
+        <div class="message">
+            <p>
+Neste Natal especial, quero que você saiba o quanto é importante para mim. Sua presença ilumina meus dias como as luzes desta árvore iluminam a noite.
+            </p>
+            <p>
+Que esta data seja repleta de amor, paz e momentos inesquecíveis ao seu lado. Você é o melhor presente que eu poderia receber! 🎄❤️
+            </p>
+            <p class="signature">Com todo meu amor, sempre ❤️</p>
+        </div>
+    </section>
+
+    <script>
+        // ============== NEVE ANIMADA ==============
+        function createSnow() {
+            const container = document.getElementById('snow-container');
+            const snowCount = 100;
+
+            for (let i = 0; i < snowCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = '❄';
+                
+                const size = Math.random() * 20 + 10;
+                const startX = Math.random() * 100;
+                const drift = (Math.random() - 0.5) * 100;
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * 5;
+                const opacity = Math.random() * 0.6 + 0.4;
+
+                snowflake.style.setProperty('--size', size + 'px');
+                snowflake.style.setProperty('--drift', drift + 'px');
+                snowflake.style.setProperty('--duration', duration + 's');
+                snowflake.style.setProperty('--delay', delay + 's');
+                snowflake.style.setProperty('--opacity', opacity);
+                snowflake.style.left = startX + '%';
+
+                container.appendChild(snowflake);
+            }
+        }
+
+        // ============== PARTÍCULAS DOURADAS ==============
+        function createSparkles() {
+            const container = document.getElementById('sparkle-container');
+            const sparkleCount = 50;
+
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
+                const midX = (Math.random() - 0.5) * 200;
+                const midY = -Math.random() * 100;
+                const duration = Math.random() * 5 + 5;
+                const delay = Math.random() * 5;
+                const opacity = Math.random() * 0.6 + 0.3;
+
+                sparkle.style.setProperty('--startX', startX + 'vw');
+                sparkle.style.setProperty('--startY', startY + 'vh');
+                sparkle.style.setProperty('--midX', midX + 'px');
+                sparkle.style.setProperty('--midY', midY + 'px');
+                sparkle.style.setProperty('--duration', duration + 's');
+                sparkle.style.setProperty('--delay', delay + 's');
+                sparkle.style.setProperty('--opacity', opacity);
+                sparkle.style.left = startX + 'vw';
+                sparkle.style.top = startY + 'vh';
+
+                container.appendChild(sparkle);
+            }
+        }
+
+        // ============== COUNTDOWN TIMER ==============
+        function updateCountdown() {
+            const christmas = new Date('December 25, 2025 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = christmas - now;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                document.querySelector('.countdown-title').textContent = '🎄 Feliz Natal! 🎄';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // ============== INICIALIZAÇÃO ==============
+        function init() {
+            createSnow();
+            createSparkles();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        // Inicia quando DOM estiver pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
