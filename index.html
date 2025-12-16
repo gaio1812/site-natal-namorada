@@ -26,11 +26,7 @@
 
         /* PISCA-PISCAS NAS LATERAIS */
         .christmas-lights-container { position: fixed; top: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; }
-        
-        /* Guirlanda superior */
         .top-garland { position: absolute; top: 0; left: 0; width: 100%; height: 80px; background: linear-gradient(180deg, rgba(15, 118, 110, 0.3) 0%, transparent 100%); }
-        
-        /* Laterais com pisca-piscas */
         .left-lights, .right-lights { position: absolute; top: 0; width: 60px; height: 100%; display: flex; flex-direction: column; align-items: center; padding: 20px 0; gap: 40px; }
         .left-lights { left: 20px; }
         .right-lights { right: 20px; }
@@ -87,7 +83,6 @@
         .light-purple { background: #a855f7; --light-color: rgba(168, 85, 247, 0.8); }
         .light-pink { background: #ec4899; --light-color: rgba(236, 72, 153, 0.8); }
 
-        /* Guirlanda superior com pisca-piscas */
         .top-lights { position: absolute; top: 10px; left: 0; width: 100%; display: flex; justify-content: space-around; padding: 0 10%; }
         .top-lights .christmas-light { position: relative; }
 
@@ -112,16 +107,50 @@
             letter-spacing: 2px;
         }
 
-        .hero-subtitle { font-size: clamp(20px, 4vw, 32px); font-weight: 300; margin-bottom: 40px; color: #e2e8f0; letter-spacing: 1px; animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards; }
+        .hero-subtitle { 
+            font-size: clamp(20px, 4vw, 32px); 
+            font-weight: 300; 
+            margin-bottom: 50px; 
+            color: #e2e8f0; 
+            letter-spacing: 1px; 
+            animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards; 
+        }
 
-        /* COUNTDOWN TIMER */
-        .countdown-container { margin: 50px 0; animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s backwards; }
-        .countdown-title { font-size: clamp(18px, 3vw, 24px); color: #d4af37; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
-        .countdown { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-        .time-unit { background: rgba(15, 118, 110, 0.2); backdrop-filter: blur(10px); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 20px; padding: 25px 30px; min-width: 100px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(212, 175, 55, 0.2); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .time-unit:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212, 175, 55, 0.4); border-color: rgba(212, 175, 55, 0.6); }
-        .time-value { font-size: clamp(36px, 6vw, 48px); font-weight: 700; color: #d4af37; display: block; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5); }
-        .time-label { font-size: clamp(12px, 2vw, 14px); color: #cbd5e1; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; display: block; font-weight: 600; }
+        /* MENSAGEM DE NATAL */
+        .christmas-message {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            padding: 50px 40px;
+            background: rgba(15, 118, 110, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(212, 175, 55, 0.2);
+            animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s backwards;
+        }
+
+        .christmas-message p {
+            font-size: clamp(17px, 3vw, 22px);
+            line-height: 2;
+            color: #f1f5f9;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 300;
+        }
+
+        .christmas-message p:last-child {
+            margin-bottom: 0;
+        }
+
+        .christmas-message .highlight {
+            color: #d4af37;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
+        }
+
+        .christmas-message .emoji {
+            font-size: clamp(20px, 4vw, 28px);
+        }
 
         /* ÁRVORE DE NATAL */
         .christmas-tree { margin: 60px 0; animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s backwards; }
@@ -129,8 +158,9 @@
         .tree-part { fill: #0f766e; }
         .tree-trunk { fill: #78350f; }
         .tree-star { fill: #fbbf24; filter: drop-shadow(0 0 15px #fbbf24); }
-        .tree-light { animation: lightBlink 1.5s ease-in-out infinite; }
+        .tree-light { animation: treeLightBlink 1.5s ease-in-out infinite; }
         .tree-light:nth-child(odd) { animation-delay: 0.5s; }
+        @keyframes treeLightBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         /* SEÇÃO DE PRESENTES INTERATIVOS */
         .gifts-section { background: rgba(15, 118, 110, 0.05); }
@@ -226,29 +256,41 @@
             transform: scale(1.05);
         }
 
-        /* MÚSICA NATALINA */
-        .music-section { background: rgba(15, 118, 110, 0.05); }
-        .music-player { background: rgba(15, 118, 110, 0.2); backdrop-filter: blur(10px); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 20px; padding: 40px; max-width: 600px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); }
-        .music-icon { font-size: 64px; margin-bottom: 20px; animation: musicPulse 2s ease-in-out infinite; }
-        @keyframes musicPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-        .music-text { font-size: 20px; color: #e2e8f0; margin-bottom: 20px; }
-        .playlist { text-align: left; margin-top: 30px; }
-        .playlist-item { font-size: 16px; color: #cbd5e1; padding: 12px; margin: 8px 0; background: rgba(255, 255, 255, 0.05); border-radius: 10px; border-left: 3px solid #d4af37; transition: all 0.3s ease; }
-        .playlist-item:hover { background: rgba(255, 255, 255, 0.1); transform: translateX(10px); }
-
         /* MENSAGEM FINAL */
-        .message { max-width: 700px; margin: 60px auto 40px; padding: 40px; background: rgba(15, 118, 110, 0.15); backdrop-filter: blur(10px); border: 2px solid rgba(212, 175, 55, 0.2); border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); }
-        .message p { font-size: clamp(16px, 3vw, 20px); line-height: 1.8; color: #e2e8f0; margin-bottom: 20px; text-align: center; }
-        .signature { font-size: clamp(18px, 3vw, 24px); color: #d4af37; font-weight: 600; margin-top: 30px; text-align: center; }
+        .final-message { 
+            max-width: 700px; 
+            margin: 60px auto 40px; 
+            padding: 40px; 
+            background: rgba(15, 118, 110, 0.15); 
+            backdrop-filter: blur(10px); 
+            border: 2px solid rgba(212, 175, 55, 0.2); 
+            border-radius: 20px; 
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); 
+        }
+        
+        .final-message p { 
+            font-size: clamp(16px, 3vw, 20px); 
+            line-height: 1.8; 
+            color: #e2e8f0; 
+            margin-bottom: 20px; 
+            text-align: center; 
+        }
+        
+        .signature { 
+            font-size: clamp(18px, 3vw, 24px); 
+            color: #d4af37; 
+            font-weight: 600; 
+            margin-top: 30px; 
+            text-align: center; 
+        }
 
         @media (max-width: 768px) {
             section { padding: 60px 15px; }
             .gifts-grid { gap: 20px; }
-            .time-unit { padding: 20px 25px; min-width: 80px; }
-            .countdown { gap: 15px; }
-            .message { padding: 30px 20px; margin: 40px 15px 30px; }
+            .final-message { padding: 30px 20px; margin: 40px 15px 30px; }
             .gift-container { height: 250px; }
             .left-lights, .right-lights { display: none; }
+            .christmas-message { padding: 35px 25px; margin-bottom: 40px; }
         }
     </style>
 </head>
@@ -258,16 +300,9 @@
 
     <!-- DECORAÇÕES NATALINAS -->
     <div class="christmas-lights-container">
-        <!-- Guirlanda superior -->
         <div class="top-garland"></div>
-        
-        <!-- Pisca-piscas no topo -->
         <div class="top-lights" id="top-lights"></div>
-        
-        <!-- Pisca-piscas lateral esquerda -->
         <div class="left-lights" id="left-lights"></div>
-        
-        <!-- Pisca-piscas lateral direita -->
         <div class="right-lights" id="right-lights"></div>
     </div>
 
@@ -276,14 +311,23 @@
         <h1 class="hero-title">Feliz Natal, Meu Amor!</h1>
         <p class="hero-subtitle">Um Natal mágico para você ❤️</p>
 
-        <div class="countdown-container">
-            <h2 class="countdown-title">Contagem para o Natal</h2>
-            <div class="countdown" id="countdown">
-                <div class="time-unit"><span class="time-value" id="days">00</span><span class="time-label">Dias</span></div>
-                <div class="time-unit"><span class="time-value" id="hours">00</span><span class="time-label">Horas</span></div>
-                <div class="time-unit"><span class="time-value" id="minutes">00</span><span class="time-label">Minutos</span></div>
-                <div class="time-unit"><span class="time-value" id="seconds">00</span><span class="time-label">Segundos</span></div>
-            </div>
+        <!-- MENSAGEM DE NATAL -->
+        <div class="christmas-message">
+            <p>
+Neste Natal tão especial, quero que você saiba que <span class="highlight">você é o maior presente</span> que a vida poderia ter me dado. <span class="emoji">🎁</span>
+            </p>
+            <p>
+Cada momento ao seu lado é como uma luz brilhante que <span class="highlight">ilumina meu caminho</span> e aquece meu coração. Seu sorriso é a minha árvore de Natal mais linda, decorada com a felicidade que você traz para minha vida. <span class="emoji">✨</span>
+            </p>
+            <p>
+Que neste Natal possamos estar juntos, criando <span class="highlight">memórias inesquecíveis</span>, compartilhando risadas, abraços apertados e todo o amor que existe entre nós. Que a magia desta época encha seu coração de paz, alegria e esperança. <span class="emoji">🎄</span>
+            </p>
+            <p>
+Você transformou meu mundo em algo mais <span class="highlight">bonito, colorido e especial</span>. Obrigado por ser quem você é, por me fazer sorrir todos os dias e por fazer parte da minha vida. Este Natal é ainda mais mágico porque tenho você ao meu lado! <span class="emoji">❤️</span>
+            </p>
+            <p>
+<span class="highlight">Feliz Natal, meu amor!</span> Que nosso amor continue crescendo como as luzes desta época, brilhando cada vez mais forte e iluminando todos os nossos dias juntos. <span class="emoji">🌟</span>
+            </p>
         </div>
 
         <div class="christmas-tree">
@@ -372,29 +416,11 @@
         </div>
     </section>
 
-    <!-- MÚSICA NATALINA -->
-    <section class="music-section">
-        <h2 class="section-title">Playlist Natalina 🎵</h2>
-        <div class="music-player">
-            <div class="music-icon">🎶</div>
-            <p class="music-text">Músicas que definem nosso Natal juntos:</p>
-            <div class="playlist">
-                <div class="playlist-item">🎵 All I Want for Christmas Is You - Mariah Carey</div>
-                <div class="playlist-item">🎵 Last Christmas - Wham!</div>
-                <div class="playlist-item">🎵 Feliz Navidad - José Feliciano</div>
-                <div class="playlist-item">🎵 Jingle Bell Rock - Bobby Helms</div>
-                <div class="playlist-item">🎵 White Christmas - Bing Crosby</div>
-                <div class="playlist-item">🎵 Santa Tell Me - Ariana Grande</div>
-            </div>
-        </div>
-    </section>
-
     <!-- MENSAGEM FINAL -->
     <section>
-        <div class="message">
-            <p>Neste Natal especial, quero que você saiba o quanto é importante para mim. Sua presença ilumina meus dias como as luzes desta árvore iluminam a noite.</p>
-            <p>Que esta data seja repleta de amor, paz e momentos inesquecíveis ao seu lado. Você é o melhor presente que eu poderia receber!</p>
-            <p>Obrigado por fazer parte da minha vida e por tornar cada dia mais especial. Mal posso esperar para criar muitas outras memórias incríveis com você! 🎄❤️</p>
+        <div class="final-message">
+            <p>Obrigado por fazer parte da minha vida e por tornar cada dia mais especial. Você é a pessoa que faz meu mundo girar e meu coração bater mais forte.</p>
+            <p>Que possamos viver muitos Natais juntos, criando histórias lindas e momentos que guardaremos para sempre em nossos corações. Te amo hoje, amanhã e sempre! 🎄❤️</p>
             <p class="signature">Com todo meu amor, sempre ❤️</p>
         </div>
     </section>
@@ -450,7 +476,6 @@
         function createChristmasLights() {
             const colors = ['light-red', 'light-green', 'light-blue', 'light-yellow', 'light-purple', 'light-pink'];
             
-            // Pisca-piscas no topo
             const topLights = document.getElementById('top-lights');
             for (let i = 0; i < 15; i++) {
                 const light = document.createElement('div');
@@ -462,7 +487,6 @@
                 topLights.appendChild(light);
             }
             
-            // Pisca-piscas lateral esquerda
             const leftLights = document.getElementById('left-lights');
             for (let i = 0; i < 20; i++) {
                 const light = document.createElement('div');
@@ -474,7 +498,6 @@
                 leftLights.appendChild(light);
             }
             
-            // Pisca-piscas lateral direita
             const rightLights = document.getElementById('right-lights');
             for (let i = 0; i < 20; i++) {
                 const light = document.createElement('div');
@@ -485,28 +508,6 @@
                 light.style.setProperty('--blink-delay', delay + 's');
                 rightLights.appendChild(light);
             }
-        }
-
-        function updateCountdown() {
-            const christmas = new Date('December 25, 2025 00:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = christmas - now;
-            if (distance < 0) {
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                document.querySelector('.countdown-title').textContent = '🎄 Feliz Natal! 🎄';
-                return;
-            }
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
         }
 
         function openGift(element) {
@@ -525,8 +526,6 @@
             createSnow();
             createSparkles();
             createChristmasLights();
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
         }
 
         if (document.readyState === 'loading') {
