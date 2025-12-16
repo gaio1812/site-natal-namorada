@@ -61,20 +61,104 @@
         .tree-svg { width: clamp(200px, 40vw, 300px); height: auto; filter: drop-shadow(0 10px 30px rgba(15, 118, 110, 0.5)); }
         .tree-part { fill: #0f766e; }
         .tree-trunk { fill: #78350f; }
-        .tree-star { fill: #fbbf24; filter: drop-shadow(0 0 15px #fbbf24); } /* ESTRELA ESTÁTICA */
+        .tree-star { fill: #fbbf24; filter: drop-shadow(0 0 15px #fbbf24); }
         .tree-light { animation: lightBlink 1.5s ease-in-out infinite; }
         .tree-light:nth-child(odd) { animation-delay: 0.5s; }
         @keyframes lightBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* DESEJOS NATALINOS */
-        .wishes-section { background: rgba(15, 118, 110, 0.05); }
-        .section-title { font-size: clamp(32px, 6vw, 56px); font-weight: 700; color: #d4af37; margin-bottom: 40px; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5); }
-        .wishes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; width: 100%; }
-        .wish-card { background: rgba(15, 118, 110, 0.2); backdrop-filter: blur(10px); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 20px; padding: 30px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); transition: all 0.3s ease; }
-        .wish-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4); border-color: rgba(212, 175, 55, 0.6); }
-        .wish-icon { font-size: 48px; margin-bottom: 20px; }
-        .wish-title { font-size: 24px; color: #d4af37; margin-bottom: 15px; font-weight: 600; }
-        .wish-text { font-size: 16px; color: #e2e8f0; line-height: 1.6; }
+        /* SEÇÃO DE PRESENTES INTERATIVOS */
+        .gifts-section { background: rgba(15, 118, 110, 0.05); }
+        .section-title { font-size: clamp(32px, 6vw, 56px); font-weight: 700; color: #d4af37; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5); }
+        .section-subtitle { font-size: clamp(16px, 3vw, 20px); color: #e2e8f0; margin-bottom: 60px; }
+        
+        .gifts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1200px; width: 100%; perspective: 1000px; }
+        
+        .gift-wrapper { cursor: pointer; transition: transform 0.3s ease; position: relative; }
+        .gift-wrapper:hover { transform: translateY(-10px); }
+        
+        .gift-container { position: relative; width: 100%; height: 300px; }
+        
+        .gift-box-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .gift-wrapper.opened .gift-box-container {
+            transform: scale(0) rotate(180deg);
+            opacity: 0;
+        }
+        
+        .gift-svg { width: 120px; height: 120px; filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3)); }
+        .gift-box { fill: var(--gift-color); }
+        .gift-ribbon { fill: #d4af37; }
+        
+        .gift-label {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #d4af37;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+        }
+        
+        .gift-message {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 118, 110, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(212, 175, 55, 0.3);
+            opacity: 0;
+            transform: scale(0.8) rotateY(-180deg);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+        }
+        
+        .gift-wrapper.opened .gift-message {
+            opacity: 1;
+            transform: scale(1) rotateY(0deg);
+            pointer-events: auto;
+        }
+        
+        .message-emoji { font-size: 48px; margin-bottom: 20px; animation: messageFloat 2s ease-in-out infinite; }
+        @keyframes messageFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        
+        .message-text {
+            font-size: clamp(16px, 3vw, 18px);
+            color: #ffffff;
+            line-height: 1.8;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(212, 175, 55, 0.3);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            color: #d4af37;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: rgba(212, 175, 55, 0.5);
+            transform: scale(1.05);
+        }
 
         /* GALERIA DE MEMÓRIAS */
         .memories-section { background: rgba(15, 23, 42, 0.5); }
@@ -94,27 +178,18 @@
         .playlist-item { font-size: 16px; color: #cbd5e1; padding: 12px; margin: 8px 0; background: rgba(255, 255, 255, 0.05); border-radius: 10px; border-left: 3px solid #d4af37; transition: all 0.3s ease; }
         .playlist-item:hover { background: rgba(255, 255, 255, 0.1); transform: translateX(10px); }
 
-        /* PRESENTES */
-        .gifts-container { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin: 40px 0; animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s backwards; }
-        .gift { width: 80px; height: 80px; cursor: pointer; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .gift:hover { animation: giftShake 0.5s ease-in-out; }
-        @keyframes giftShake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-10deg); } 75% { transform: rotate(10deg); } }
-        .gift-box { fill: var(--gift-color); }
-        .gift-ribbon { fill: #d4af37; }
-
         /* MENSAGEM FINAL */
-        .message { max-width: 700px; margin: 60px auto 40px; padding: 40px; background: rgba(15, 118, 110, 0.15); backdrop-filter: blur(10px); border: 2px solid rgba(212, 175, 55, 0.2); border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.5s backwards; }
+        .message { max-width: 700px; margin: 60px auto 40px; padding: 40px; background: rgba(15, 118, 110, 0.15); backdrop-filter: blur(10px); border: 2px solid rgba(212, 175, 55, 0.2); border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); }
         .message p { font-size: clamp(16px, 3vw, 20px); line-height: 1.8; color: #e2e8f0; margin-bottom: 20px; text-align: center; }
         .signature { font-size: clamp(18px, 3vw, 24px); color: #d4af37; font-weight: 600; margin-top: 30px; text-align: center; }
 
         @media (max-width: 768px) {
             section { padding: 60px 15px; }
-            .wishes-grid, .memories-grid { gap: 20px; }
+            .gifts-grid, .memories-grid { gap: 20px; }
             .time-unit { padding: 20px 25px; min-width: 80px; }
             .countdown { gap: 15px; }
             .message { padding: 30px 20px; margin: 40px 15px 30px; }
-            .gifts-container { gap: 20px; }
-            .gift { width: 60px; height: 60px; }
+            .gift-container { height: 250px; }
         }
     </style>
 </head>
@@ -153,47 +228,132 @@
                 <circle class="tree-light" cx="135" cy="125" r="4" fill="#10b981"/>
             </svg>
         </div>
-
-        <div class="gifts-container">
-            <svg class="gift" viewBox="0 0 100 100"><rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #ef4444;"/><rect class="gift-ribbon" x="45" y="35" width="10" height="50"/><rect class="gift-ribbon" x="20" y="55" width="60" height="10"/><ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/></svg>
-            <svg class="gift" viewBox="0 0 100 100"><rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #10b981;"/><rect class="gift-ribbon" x="45" y="35" width="10" height="50"/><rect class="gift-ribbon" x="20" y="55" width="60" height="10"/><ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/></svg>
-            <svg class="gift" viewBox="0 0 100 100"><rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #3b82f6;"/><rect class="gift-ribbon" x="45" y="35" width="10" height="50"/><rect class="gift-ribbon" x="20" y="55" width="60" height="10"/><ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/></svg>
-        </div>
     </section>
 
-    <!-- DESEJOS NATALINOS -->
-    <section class="wishes-section">
-        <h2 class="section-title">Meus Desejos Para Você ✨</h2>
-        <div class="wishes-grid">
-            <div class="wish-card">
-                <div class="wish-icon">❤️</div>
-                <h3 class="wish-title">Amor Infinito</h3>
-                <p class="wish-text">Que nosso amor cresça cada dia mais, como as luzes desta época iluminam o mundo ao nosso redor.</p>
+    <!-- PRESENTES INTERATIVOS -->
+    <section class="gifts-section">
+        <h2 class="section-title">Presentes Para Você 🎁</h2>
+        <p class="section-subtitle">Clique em cada presente para descobrir uma mensagem especial!</p>
+        
+        <div class="gifts-grid">
+            <!-- Presente 1 -->
+            <div class="gift-wrapper" onclick="openGift(this)">
+                <div class="gift-container">
+                    <div class="gift-box-container">
+                        <svg class="gift-svg" viewBox="0 0 100 100">
+                            <rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #ef4444;"/>
+                            <rect class="gift-ribbon" x="45" y="35" width="10" height="50"/>
+                            <rect class="gift-ribbon" x="20" y="55" width="60" height="10"/>
+                            <ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/>
+                        </svg>
+                        <div class="gift-label">Amor Infinito</div>
+                    </div>
+                    <div class="gift-message">
+                        <div class="message-emoji">❤️</div>
+                        <p class="message-text">Meu amor por você não tem fim, cresce a cada dia que passa. Você é a razão do meu sorriso e a felicidade que preenche meu coração!</p>
+                        <button class="close-btn" onclick="closeGift(event, this)">Fechar</button>
+                    </div>
+                </div>
             </div>
-            <div class="wish-card">
-                <div class="wish-icon">✨</div>
-                <h3 class="wish-title">Paz e Harmonia</h3>
-                <p class="wish-text">Que a paz natalina encha seu coração e que todos os seus dias sejam repletos de harmonia.</p>
+
+            <!-- Presente 2 -->
+            <div class="gift-wrapper" onclick="openGift(this)">
+                <div class="gift-container">
+                    <div class="gift-box-container">
+                        <svg class="gift-svg" viewBox="0 0 100 100">
+                            <rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #10b981;"/>
+                            <rect class="gift-ribbon" x="45" y="35" width="10" height="50"/>
+                            <rect class="gift-ribbon" x="20" y="55" width="60" height="10"/>
+                            <ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/>
+                        </svg>
+                        <div class="gift-label">Gratidão</div>
+                    </div>
+                    <div class="gift-message">
+                        <div class="message-emoji">🙏</div>
+                        <p class="message-text">Sou grato por cada momento ao seu lado, cada risada compartilhada, cada abraço. Você transformou minha vida em algo mais belo e completo!</p>
+                        <button class="close-btn" onclick="closeGift(event, this)">Fechar</button>
+                    </div>
+                </div>
             </div>
-            <div class="wish-card">
-                <div class="wish-icon">🌟</div>
-                <h3 class="wish-title">Sonhos Realizados</h3>
-                <p class="wish-text">Que todos os seus sonhos se realizem e que o próximo ano seja ainda mais incrível para nós dois.</p>
+
+            <!-- Presente 3 -->
+            <div class="gift-wrapper" onclick="openGift(this)">
+                <div class="gift-container">
+                    <div class="gift-box-container">
+                        <svg class="gift-svg" viewBox="0 0 100 100">
+                            <rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #3b82f6;"/>
+                            <rect class="gift-ribbon" x="45" y="35" width="10" height="50"/>
+                            <rect class="gift-ribbon" x="20" y="55" width="60" height="10"/>
+                            <ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/>
+                        </svg>
+                        <div class="gift-label">Cumplicidade</div>
+                    </div>
+                    <div class="gift-message">
+                        <div class="message-emoji">🤝</div>
+                        <p class="message-text">Somos mais do que um casal, somos parceiros, confidentes, melhores amigos. Juntos podemos enfrentar qualquer desafio que a vida nos trouxer!</p>
+                        <button class="close-btn" onclick="closeGift(event, this)">Fechar</button>
+                    </div>
+                </div>
             </div>
-            <div class="wish-card">
-                <div class="wish-icon">🎅</div>
-                <h3 class="wish-title">Alegria Eterna</h3>
-                <p class="wish-text">Que seu sorriso ilumine meus dias como o Papai Noel ilumina o Natal das crianças.</p>
+
+            <!-- Presente 4 -->
+            <div class="gift-wrapper" onclick="openGift(this)">
+                <div class="gift-container">
+                    <div class="gift-box-container">
+                        <svg class="gift-svg" viewBox="0 0 100 100">
+                            <rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #fbbf24;"/>
+                            <rect class="gift-ribbon" x="45" y="35" width="10" height="50"/>
+                            <rect class="gift-ribbon" x="20" y="55" width="60" height="10"/>
+                            <ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/>
+                        </svg>
+                        <div class="gift-label">Sonhos</div>
+                    </div>
+                    <div class="gift-message">
+                        <div class="message-emoji">✨</div>
+                        <p class="message-text">Meus sonhos mais bonitos agora incluem você. Quero construir um futuro incrível ao seu lado, cheio de amor, aventuras e realizações!</p>
+                        <button class="close-btn" onclick="closeGift(event, this)">Fechar</button>
+                    </div>
+                </div>
             </div>
-            <div class="wish-card">
-                <div class="wish-icon">🎁</div>
-                <h3 class="wish-title">Momentos Especiais</h3>
-                <p class="wish-text">Que possamos criar muitas memórias inesquecíveis juntos neste Natal e sempre.</p>
+
+            <!-- Presente 5 -->
+            <div class="gift-wrapper" onclick="openGift(this)">
+                <div class="gift-container">
+                    <div class="gift-box-container">
+                        <svg class="gift-svg" viewBox="0 0 100 100">
+                            <rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #a855f7;"/>
+                            <rect class="gift-ribbon" x="45" y="35" width="10" height="50"/>
+                            <rect class="gift-ribbon" x="20" y="55" width="60" height="10"/>
+                            <ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/>
+                        </svg>
+                        <div class="gift-label">Admiração</div>
+                    </div>
+                    <div class="gift-message">
+                        <div class="message-emoji">🌟</div>
+                        <p class="message-text">Admiro sua força, sua inteligência, sua beleza interior e exterior. Você é uma pessoa incrível e me inspira a ser melhor a cada dia!</p>
+                        <button class="close-btn" onclick="closeGift(event, this)">Fechar</button>
+                    </div>
+                </div>
             </div>
-            <div class="wish-card">
-                <div class="wish-icon">🎄</div>
-                <h3 class="wish-title">Magia Natalina</h3>
-                <p class="wish-text">Que a magia do Natal encha sua vida de felicidade, esperança e muito amor.</p>
+
+            <!-- Presente 6 -->
+            <div class="gift-wrapper" onclick="openGift(this)">
+                <div class="gift-container">
+                    <div class="gift-box-container">
+                        <svg class="gift-svg" viewBox="0 0 100 100">
+                            <rect class="gift-box" x="20" y="35" width="60" height="50" rx="5" style="--gift-color: #ec4899;"/>
+                            <rect class="gift-ribbon" x="45" y="35" width="10" height="50"/>
+                            <rect class="gift-ribbon" x="20" y="55" width="60" height="10"/>
+                            <ellipse class="gift-ribbon" cx="50" cy="30" rx="15" ry="8"/>
+                        </svg>
+                        <div class="gift-label">Promessa</div>
+                    </div>
+                    <div class="gift-message">
+                        <div class="message-emoji">💍</div>
+                        <p class="message-text">Prometo estar ao seu lado nos bons e maus momentos, te apoiar, te amar incondicionalmente e fazer de tudo para te ver feliz. Para sempre!</p>
+                        <button class="close-btn" onclick="closeGift(event, this)">Fechar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -306,6 +466,18 @@
             document.getElementById('hours').textContent = String(hours).padStart(2, '0');
             document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
             document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        function openGift(element) {
+            if (!element.classList.contains('opened')) {
+                element.classList.add('opened');
+            }
+        }
+
+        function closeGift(event, button) {
+            event.stopPropagation();
+            const wrapper = button.closest('.gift-wrapper');
+            wrapper.classList.remove('opened');
         }
 
         function init() {
