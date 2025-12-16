@@ -14,6 +14,128 @@
             position: relative;
         }
 
+        /* TELA DE CARREGAMENTO */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-content {
+            text-align: center;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .loading-tree {
+            font-size: clamp(80px, 15vw, 120px);
+            animation: treeGrow 1.5s ease-in-out infinite;
+            margin-bottom: 30px;
+        }
+
+        @keyframes treeGrow {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(-5deg); }
+            75% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .loading-title {
+            font-size: clamp(24px, 5vw, 36px);
+            font-weight: 700;
+            color: #d4af37;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 20px rgba(212, 175, 55, 0.6);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 2px 20px rgba(212, 175, 55, 0.6); }
+            50% { text-shadow: 0 2px 40px rgba(212, 175, 55, 1), 0 0 60px rgba(212, 175, 55, 0.8); }
+        }
+
+        .loading-subtitle {
+            font-size: clamp(16px, 3vw, 20px);
+            color: #e2e8f0;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .progress-container {
+            width: clamp(250px, 60vw, 400px);
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #d4af37 0%, #fbbf24 50%, #d4af37 100%);
+            background-size: 200% 100%;
+            border-radius: 10px;
+            animation: progressLoad 3s ease-out forwards, shimmer 1.5s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+            width: 0%;
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .loading-percentage {
+            margin-top: 15px;
+            font-size: clamp(18px, 4vw, 24px);
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        .loading-sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .loading-sparkle {
+            position: absolute;
+            font-size: clamp(20px, 4vw, 30px);
+            animation: sparkleAnim var(--duration) ease-in-out infinite;
+            animation-delay: var(--delay);
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% { opacity: 0; transform: translateY(0) scale(0); }
+            50% { opacity: 1; transform: translateY(-50px) scale(1); }
+        }
+
         /* NEVE ANIMADA */
         .snow-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
         .snowflake { position: absolute; top: -10px; color: #ffffff; font-size: var(--size); opacity: var(--opacity); animation: fall var(--duration) linear infinite; animation-delay: var(--delay); text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
@@ -69,11 +191,6 @@
         @keyframes lightBlink {
             0%, 100% { opacity: 0.3; filter: brightness(0.5); }
             50% { opacity: 1; filter: brightness(1.5); }
-        }
-        
-        @keyframes glow {
-            0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.5); }
         }
         
         .light-red { background: #ef4444; --light-color: rgba(239, 68, 68, 0.8); }
@@ -138,19 +255,9 @@
             font-weight: 300;
         }
 
-        .christmas-message p:last-child {
-            margin-bottom: 0;
-        }
-
-        .christmas-message .highlight {
-            color: #d4af37;
-            font-weight: 600;
-            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
-        }
-
-        .christmas-message .emoji {
-            font-size: clamp(20px, 4vw, 28px);
-        }
+        .christmas-message p:last-child { margin-bottom: 0; }
+        .christmas-message .highlight { color: #d4af37; font-weight: 600; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.4); }
+        .christmas-message .emoji { font-size: clamp(20px, 4vw, 28px); }
 
         /* ÁRVORE DE NATAL */
         .christmas-tree { margin: 60px 0; animation: fadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s backwards; }
@@ -295,6 +402,20 @@
     </style>
 </head>
 <body>
+    <!-- TELA DE CARREGAMENTO -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-sparkles" id="loading-sparkles"></div>
+        <div class="loading-content">
+            <div class="loading-tree">🎄</div>
+            <h1 class="loading-title">Preparando algo especial...</h1>
+            <p class="loading-subtitle">Aguarde um momento ❤️</p>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="loading-percentage" id="loading-percentage">0%</div>
+        </div>
+    </div>
+
     <div class="snow-container" id="snow-container"></div>
     <div class="sparkle-container" id="sparkle-container"></div>
 
@@ -311,23 +432,12 @@
         <h1 class="hero-title">Feliz Natal, Meu Amor!</h1>
         <p class="hero-subtitle">Um Natal mágico para você ❤️</p>
 
-        <!-- MENSAGEM DE NATAL -->
         <div class="christmas-message">
-            <p>
-Neste Natal tão especial, quero que você saiba que <span class="highlight">você é o maior presente</span> que a vida poderia ter me dado. <span class="emoji">🎁</span>
-            </p>
-            <p>
-Cada momento ao seu lado é como uma luz brilhante que <span class="highlight">ilumina meu caminho</span> e aquece meu coração. Seu sorriso é a minha árvore de Natal mais linda, decorada com a felicidade que você traz para minha vida. <span class="emoji">✨</span>
-            </p>
-            <p>
-Que neste Natal possamos estar juntos, criando <span class="highlight">memórias inesquecíveis</span>, compartilhando risadas, abraços apertados e todo o amor que existe entre nós. Que a magia desta época encha seu coração de paz, alegria e esperança. <span class="emoji">🎄</span>
-            </p>
-            <p>
-Você transformou meu mundo em algo mais <span class="highlight">bonito, colorido e especial</span>. Obrigado por ser quem você é, por me fazer sorrir todos os dias e por fazer parte da minha vida. Este Natal é ainda mais mágico porque tenho você ao meu lado! <span class="emoji">❤️</span>
-            </p>
-            <p>
-<span class="highlight">Feliz Natal, meu amor!</span> Que nosso amor continue crescendo como as luzes desta época, brilhando cada vez mais forte e iluminando todos os nossos dias juntos. <span class="emoji">🌟</span>
-            </p>
+            <p>Neste Natal tão especial, quero que você saiba que <span class="highlight">você é o maior presente</span> que a vida poderia ter me dado. <span class="emoji">🎁</span></p>
+            <p>Cada momento ao seu lado é como uma luz brilhante que <span class="highlight">ilumina meu caminho</span> e aquece meu coração. Seu sorriso é a minha árvore de Natal mais linda, decorada com a felicidade que você traz para minha vida. <span class="emoji">✨</span></p>
+            <p>Que neste Natal possamos estar juntos, criando <span class="highlight">memórias inesquecíveis</span>, compartilhando risadas, abraços apertados e todo o amor que existe entre nós. Que a magia desta época encha seu coração de paz, alegria e esperança. <span class="emoji">🎄</span></p>
+            <p>Você transformou meu mundo em algo mais <span class="highlight">bonito, colorido e especial</span>. Obrigado por ser quem você é, por me fazer sorrir todos os dias e por fazer parte da minha vida. Este Natal é ainda mais mágico porque tenho você ao meu lado! <span class="emoji">❤️</span></p>
+            <p><span class="highlight">Feliz Natal, meu amor!</span> Que nosso amor continue crescendo como as luzes desta época, brilhando cada vez mais forte e iluminando todos os nossos dias juntos. <span class="emoji">🌟</span></p>
         </div>
 
         <div class="christmas-tree">
@@ -426,6 +536,44 @@ Você transformou meu mundo em algo mais <span class="highlight">bonito, colorid
     </section>
 
     <script>
+        // TELA DE CARREGAMENTO
+        function initLoading() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const progressBar = document.getElementById('progress-bar');
+            const loadingPercentage = document.getElementById('loading-percentage');
+            const loadingSparkles = document.getElementById('loading-sparkles');
+            
+            // Criar sparkles na tela de loading
+            const emojis = ['✨', '⭐', '🌟', '💫'];
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'loading-sparkle';
+                sparkle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.setProperty('--duration', (Math.random() * 2 + 2) + 's');
+                sparkle.style.setProperty('--delay', Math.random() * 2 + 's');
+                loadingSparkles.appendChild(sparkle);
+            }
+            
+            // Animar porcentagem
+            let percentage = 0;
+            const interval = setInterval(() => {
+                percentage += Math.random() * 5;
+                if (percentage >= 100) {
+                    percentage = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingScreen.classList.add('hidden');
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 800);
+                    }, 500);
+                }
+                loadingPercentage.textContent = Math.floor(percentage) + '%';
+            }, 100);
+        }
+
         function createSnow() {
             const container = document.getElementById('snow-container');
             for (let i = 0; i < 100; i++) {
@@ -523,6 +671,7 @@ Você transformou meu mundo em algo mais <span class="highlight">bonito, colorid
         }
 
         function init() {
+            initLoading();
             createSnow();
             createSparkles();
             createChristmasLights();
